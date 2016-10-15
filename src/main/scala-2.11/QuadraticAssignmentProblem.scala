@@ -8,8 +8,6 @@ object QuadraticAssignmentProblem extends App {
   //Data downloaded from https://www.cs.put.poznan.pl/mkomosinski/lectures/mam/qap.zip
   //Format documentation http://anjos.mgi.polymtl.ca/qaplib/inst.html
 
-  val qap:QuadraticAssignmentProblem=loadInstance("./qapdatsol/bur26a.dat")
-
   def loadInstance(path:String):QuadraticAssignmentProblem ={
     def readLinesFromFile: Iterator[String] = {
       Source.fromFile(path).getLines()
@@ -35,14 +33,14 @@ object QuadraticAssignmentProblem extends App {
     val flows= getMatrix(instanceSize, lines)
     skipLine(lines)
     val distances=getMatrix(instanceSize, lines)
-    QuadraticAssignmentProblem(flows, distances)
+    new QuadraticAssignmentProblem(instanceSize, flows, distances)
   }
 
-  def apply(flows:Array[Array[Int]], distances:Array[Array[Int]]) = new QuadraticAssignmentProblem(flows, distances)
+  def apply(path:String) = loadInstance(path)
 
 }
 
-class QuadraticAssignmentProblem(val flows:Array[Array[Int]], val distances:Array[Array[Int]]){
+class QuadraticAssignmentProblem(val size:Int, val flows:Array[Array[Int]], val distances:Array[Array[Int]]){
 
 
 
