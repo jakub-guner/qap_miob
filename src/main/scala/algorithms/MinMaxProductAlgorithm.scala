@@ -10,21 +10,12 @@ object MinMaxProductAlgorithm extends Algorithm{
 
   case class Entry(value: Int, row: Int, col:Int)
   case class Position(facilityIndex: Int, locationIndex:Int)
-
-  //For performance use mutable.DoubleLinkedList
+  
   override def calculate(problem: QuadraticAssignmentProblem): QuadraticAssignmentSolution = {
-
-//    val permutation=Array.fill[Int](problem.size)({-1})
+    
     val flows=toSortedList(problem.flows)
     val distances=toSortedList(problem.distances)
-//
-//    println("Flows")
-//    flows.foreach(println)
-//
-//    println("Dists")
-//    distances.foreach(println)
 
-//    flows.foreach(println)
 
     val solution=findBestMatches(flows, distances)
 
@@ -37,30 +28,29 @@ object MinMaxProductAlgorithm extends Algorithm{
   }
 
   def findBestMatches(flows: List[Entry], distances: List[Entry]): List[Position] ={
+    
+    def filterEntries(entry:Entry, selected:Entry):Boolean={
+      entry.row!=selected.row &&
+      entry.row!=selected.col &&
+      entry.col!=selected.col &&
+      entry.col!=selected.row
+    }
 
     if(flows.nonEmpty && distances.nonEmpty){
       val biggestFlowSmallestDistance=flows.head.value * distances.last.value
       val biggestDistanceSmallestFlow=distances.head.value * flows.last.value
-
-//      println(biggestFlowSmallestDistance +" vs. "+biggestDistanceSmallestFlow)
+      
 
       if(biggestFlowSmallestDistance < biggestDistanceSmallestFlow){
         val flow=flows.head
         val distance=distances.last
         val newFlows=flows
           .drop(1)
-          .filter(_.row!=flow.row)
-          .filter(_.row!=flow.col)
-          .filter(_.col!=flow.col)
-          .filter(_.col!=flow.row)
+          .filter(filterEntries(_, flow))
+
         val newDistances=distances
           .dropRight(1)
-          .filter(_.row!=distance.row)
-          .filter(_.row!=distance.col)
-          .filter(_.col!=distance.col)
-          .filter(_.col!=distance.row)
-
-//        printDebug(newFlows, newDistances)
+          .filter(filterEntries(_, distance))
 
         Position(flow.row, distance.row) :: Position(flow.col, distance.col) :: findBestMatches(newFlows, newDistances)
       }else{
@@ -68,19 +58,11 @@ object MinMaxProductAlgorithm extends Algorithm{
         val distance=distances.head
         val newFlows=flows
           .dropRight(1)
-          .filter(_.row!=flow.row)
-          .filter(_.row!=flow.col)
-          .filter(_.col!=flow.col)
-          .filter(_.col!=flow.row)
+          .filter(filterEntries(_, flow))
+
         val newDistances=distances
           .drop(1)
-          .filter(_.row!=distance.row)
-          .filter(_.row!=distance.col)
-          .filter(_.col!=distance.col)
-          .filter(_.col!=distance.row)
-
-
-//        printDebug(newFlows, newDistances)
+          .filter(filterEntries(_, distance))
 
         Position(flow.row, distance.row) :: Position(flow.col, distance.col) :: findBestMatches(newFlows, newDistances)
       }
@@ -91,22 +73,7 @@ object MinMaxProductAlgorithm extends Algorithm{
 
 
   }
-
-  def printDebug(flows: List[Entry], distances: List[Entry])={
-    println("-------------------------------")
-
-    println("Flows")
-    flows.foreach(println)
-
-    println("Dists")
-    distances.foreach(println)
-
-  }
-
-
-
-  //Full entry
-  //Zmienic na tylko pod przekatna - symetryczny flow i distance
+  
   def toSortedList(matrix:Array[Array[Int]]) : List[Entry] = {
     val entryArray=for{
 
@@ -120,11 +87,3 @@ object MinMaxProductAlgorithm extends Algorithm{
       .toList
   }
 }
-
-
-//object MinMaxProductAlgorithm{
-//  def apply(problem: QuadraticAssignmentProblem):QuadraticAssignmentSolution = {
-//    {new MinMaxProductAlgorithm}.
-//    measureTime(calculate(problem))
-//  }
-//}
