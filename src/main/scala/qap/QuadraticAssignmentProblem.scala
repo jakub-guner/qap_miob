@@ -1,3 +1,5 @@
+package qap
+
 import scala.Array._
 import scala.io.Source
 

@@ -1,3 +1,7 @@
+package algorithms
+
+import qap.{QuadraticAssignmentSolution, QuadraticAssignmentProblem}
+
 /**
  * Created by JG on 15/10/16.
  */
@@ -11,3 +15,5 @@ abstract class Algorithm extends Stopwatch{
 
 
 }
+
+

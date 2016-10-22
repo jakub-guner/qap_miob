@@ -1,3 +1,7 @@
+package algorithms
+
+import qap.QuadraticAssignmentSolution
+
 /**
  * Created by JG on 13/10/16.
  */
