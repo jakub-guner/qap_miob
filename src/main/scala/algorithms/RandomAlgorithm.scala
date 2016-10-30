@@ -11,6 +11,10 @@ object RandomAlgorithm extends Algorithm{
   val random=new scala.util.Random()
 
   def calculate(problem: QuadraticAssignmentProblem): QuadraticAssignmentSolution = {
-    QuadraticAssignmentSolution(random.shuffle(1 to 10).toArray[Int])
+    QuadraticAssignmentSolution(randomPermutation(problem))
+  }
+
+  def randomPermutation(problem: QuadraticAssignmentProblem): Array[Int] = {
+    random.shuffle(1 to problem.size).toArray[Int]
   }
 }
