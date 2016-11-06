@@ -9,7 +9,7 @@ import qap.QuadraticAssignmentProblem
  * Created by JG on 30/10/16.
  */
 class SteepestSearch extends LocalSearch{
-  override def searchNeighbourhood(problem: QuadraticAssignmentProblem, currentPermutation: Array[Int], currentResult: Int): Array[Int] = {
+  override def searchNeighbourhood(problem: QuadraticAssignmentProblem, currentPermutation: Array[Int], currentResult: Int): (Array[Int], Int, Boolean) = {
     try {
       val (newPermutation, newResult) =
         neighbourhood(currentPermutation)
@@ -23,9 +23,9 @@ class SteepestSearch extends LocalSearch{
           case (permutation, result:Int) => result
         }
 
-      searchNeighbourhood(problem, newPermutation, newResult)
+      (newPermutation, newResult, true)
     }catch{
-      case uoe:UnsupportedOperationException => currentPermutation
+      case uoe:UnsupportedOperationException => (currentPermutation, currentResult, false)
     }
 
   }

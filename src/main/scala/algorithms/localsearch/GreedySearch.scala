@@ -12,7 +12,8 @@ import qap.{QuadraticAssignmentSolution, QuadraticAssignmentProblem}
  */
 class GreedySearch extends LocalSearch{
 
-  def searchNeighbourhood(problem: QuadraticAssignmentProblem, currentPermutation: Array[Int], currentResult: Int): Array[Int] = {
+
+  def searchNeighbourhood(problem: QuadraticAssignmentProblem, currentPermutation: Array[Int], currentResult: Int): (Array[Int], Int, Boolean) = {
     try {
       val (newPermutation, newResult) =
         neighbourhood(currentPermutation)
@@ -23,9 +24,9 @@ class GreedySearch extends LocalSearch{
           case (permutation, result:Int) => result < currentResult
         }.head
 
-      searchNeighbourhood(problem, newPermutation, newResult)
+      (newPermutation,newResult,true)
     }catch{
-      case nse:NoSuchElementException => currentPermutation
+      case nse:NoSuchElementException => (currentPermutation, currentResult, false)
     }
   }
 }
