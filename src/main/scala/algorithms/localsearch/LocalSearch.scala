@@ -1,9 +1,10 @@
 package algorithms.localsearch
 
 import algorithms.Algorithm
-import algorithms.Evaluator._
+import qap.{QuadraticAssignmentEvaluator, QuadraticAssignmentSolution, QuadraticAssignmentProblem}
+import QuadraticAssignmentEvaluator._
 import algorithms.RandomAlgorithm._
-import qap.{QuadraticAssignmentSolution, QuadraticAssignmentProblem}
+import qap.{QuadraticAssignmentEvaluator, QuadraticAssignmentSolution, QuadraticAssignmentProblem}
 
 /**
  * Created by JG on 30/10/16.
@@ -12,7 +13,7 @@ abstract class LocalSearch extends Algorithm with Neighbourhood{
 
   override def calculate(problem: QuadraticAssignmentProblem): QuadraticAssignmentSolution = {
     val initPermutation=randomPermutation(problem)
-    val initResult=calculateResult(initPermutation, problem)
+    val initResult=problem.calculateResult(initPermutation)
 
     val bestPermutation = searchNeighbourhood(problem, initPermutation, initResult)
     QuadraticAssignmentSolution(bestPermutation)

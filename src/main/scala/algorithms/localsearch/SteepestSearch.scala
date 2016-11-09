@@ -1,9 +1,9 @@
 package algorithms.localsearch
 
 import java.util.NoSuchElementException
-
-import algorithms.Evaluator._
-import qap.QuadraticAssignmentProblem
+import qap.{QuadraticAssignmentEvaluator, QuadraticAssignmentProblem}
+import QuadraticAssignmentEvaluator._
+import qap.{QuadraticAssignmentEvaluator, QuadraticAssignmentProblem}
 
 /**
  * Created by JG on 30/10/16.
@@ -14,7 +14,7 @@ class SteepestSearch extends LocalSearch{
       val (newPermutation, newResult) =
         neighbourhood(currentPermutation)
         .map{
-          case permutation => (permutation, calculateResult(permutation, problem))
+          case permutation => (permutation, problem.calculateResult(permutation))
         }
         .filter {
           case (permutation, result:Int) => result < currentResult

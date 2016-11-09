@@ -2,10 +2,11 @@ package algorithms.localsearch
 
 import java.util.NoSuchElementException
 
-import algorithms.{Evaluator, RandomAlgorithm, Algorithm}
-import algorithms.Evaluator._
+import algorithms.{RandomAlgorithm, Algorithm}
+import qap.{QuadraticAssignmentEvaluator, QuadraticAssignmentSolution, QuadraticAssignmentProblem}
+import QuadraticAssignmentEvaluator._
 import algorithms.RandomAlgorithm._
-import qap.{QuadraticAssignmentSolution, QuadraticAssignmentProblem}
+import qap.{QuadraticAssignmentEvaluator, QuadraticAssignmentSolution, QuadraticAssignmentProblem}
 
 /**
  * Created by JG on 30/10/16.
@@ -17,7 +18,7 @@ class GreedySearch extends LocalSearch{
       val (newPermutation, newResult) =
         neighbourhood(currentPermutation)
         .map{
-          case permutation => (permutation, calculateResult(permutation, problem))
+          case permutation => (permutation, problem.calculateResult(permutation))
         }
         .filter {
           case (permutation, result:Int) => result < currentResult
