@@ -1,18 +1,18 @@
 package algorithms.localsearch
 
 import java.util.NoSuchElementException
-import qap.{QuadraticAssignmentEvaluator, QuadraticAssignmentProblem}
+import qap._
 import QuadraticAssignmentEvaluator._
-import qap.{QuadraticAssignmentEvaluator, QuadraticAssignmentProblem}
 
 /**
  * Created by JG on 30/10/16.
  */
 class SteepestSearch extends LocalSearch{
-  override def searchNeighbourhood(problem: QuadraticAssignmentProblem, currentPermutation: Array[Int], currentResult: Int): Array[Int] = {
+  override def searchSolutionSpace(problem: QuadraticAssignmentProblem, currentPermutation: Array[Int], currentResult: Int, steps:Int, evaluatedSolutions:Int): QuadraticAssignmentSolution = {
     try {
+      val nb=neighbourhood(currentPermutation)
       val (newPermutation, newResult) =
-        neighbourhood(currentPermutation)
+        nb
         .map{
           case permutation => (permutation, problem.calculateResult(permutation))
         }
@@ -22,10 +22,9 @@ class SteepestSearch extends LocalSearch{
         .minBy {
           case (permutation, result:Int) => result
         }
-
-      searchNeighbourhood(problem, newPermutation, newResult)
+      searchSolutionSpace(problem, newPermutation, newResult, steps=steps+1, evaluatedSolutions=evaluatedSolutions+nb.size)
     }catch{
-      case uoe:UnsupportedOperationException => currentPermutation
+      case uoe:UnsupportedOperationException => QuadraticAssignmentSolution(currentPermutation).copy(steps=steps, evaluatedSolutions=evaluatedSolutions)
     }
 
   }

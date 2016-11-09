@@ -15,11 +15,10 @@ abstract class LocalSearch extends Algorithm with Neighbourhood{
     val initPermutation=randomPermutation(problem)
     val initResult=problem.calculateResult(initPermutation)
 
-    val bestPermutation = searchNeighbourhood(problem, initPermutation, initResult)
-    QuadraticAssignmentSolution(bestPermutation)
+    searchSolutionSpace(problem, initPermutation, initResult).copy(initialValue = initResult)
   }
 
-  def searchNeighbourhood(problem: QuadraticAssignmentProblem, currentPermutation: Array[Int], currentResult: Int): Array[Int]
+  def searchSolutionSpace(problem: QuadraticAssignmentProblem, currentPermutation: Array[Int], currentResult: Int, steps:Int=0, evaluatedSolutions:Int=0): QuadraticAssignmentSolution
 
 
 
