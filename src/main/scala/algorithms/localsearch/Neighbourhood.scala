@@ -5,6 +5,8 @@ package algorithms.localsearch
  */
 trait Neighbourhood {
 
+  def neighName:String
+
   def neighbourhood(solution: Array[Int]):Stream[Array[Int]] = {Stream.empty}
 
   def getAllIndexes(solution: Array[Int]): Range = {

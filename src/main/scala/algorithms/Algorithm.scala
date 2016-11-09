@@ -9,6 +9,8 @@ abstract class Algorithm extends Stopwatch{
 
   def calculate(problem: QuadraticAssignmentProblem):QuadraticAssignmentSolution
 
+  def name:String
+
   def apply(problem: QuadraticAssignmentProblem):QuadraticAssignmentSolution = {
     QuadraticAssignmentEvaluator(measureTime(calculate(problem)), problem)
   }

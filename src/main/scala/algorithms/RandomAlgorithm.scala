@@ -5,6 +5,7 @@ import qap.{QuadraticAssignmentSolution, QuadraticAssignmentProblem}
  * Created by JG on 15/10/16.
  */
 object RandomAlgorithm extends Algorithm{
+
   private val MILLION=Math.pow(10,6)
 
   private var _timeLimit=0
@@ -27,16 +28,20 @@ object RandomAlgorithm extends Algorithm{
       ((System.nanoTime() - start) / MILLION).toInt < _timeLimit
     }
 
-    while (withinTimeLimit){
+    do {
       val newPerm=randomPermutation(problem)
       val newResult=problem.calculateResult(newPerm)
-      if(newResult<bestResult)
+      if(newResult<bestResult){
         bestPermutation=newPerm
-    }
+        bestResult=newResult
+      }
+    }while(withinTimeLimit)
     bestPermutation
   }
 
   def randomPermutation(problem: QuadraticAssignmentProblem): Array[Int] = {
     random.shuffle(1 to problem.size).toArray[Int]
   }
+
+  override def name: String = "random"
 }

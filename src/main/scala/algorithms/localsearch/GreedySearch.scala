@@ -30,4 +30,8 @@ class GreedySearch extends LocalSearch{
       case nse:NoSuchElementException => QuadraticAssignmentSolution(currentPermutation).copy(steps=steps, evaluatedSolutions=evaluatedSolutions)
     }
   }
+
+  override def neighName: String = ""
+
+  override def name: String = "greedy"+neighName
 }

@@ -86,4 +86,6 @@ object MinMaxProductAlgorithm extends Algorithm{
       .sortWith(_.value > _.value)
       .toList
   }
+
+  override def name: String = "heuristic"
 }

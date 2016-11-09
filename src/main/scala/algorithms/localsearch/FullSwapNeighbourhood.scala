@@ -5,6 +5,8 @@ package algorithms.localsearch
  */
 trait FullSwapNeighbourhood extends Neighbourhood{
 
+  override def neighName:String = "-2swap"
+
   override def neighbourhood(solution: Array[Int]):Stream[Array[Int]]={
     val allPairs=for{
       left <- getAllIndexes(solution)
