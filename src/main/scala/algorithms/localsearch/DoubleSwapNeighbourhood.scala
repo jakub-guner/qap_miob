@@ -3,7 +3,7 @@ package algorithms.localsearch
 /**
  * Created by JG on 29/10/16.
  */
-trait FullSwapNeighbourhood extends Neighbourhood{
+trait DoubleSwapNeighbourhood extends Neighbourhood{
 
   override def neighName:String = "-2swap"
 
