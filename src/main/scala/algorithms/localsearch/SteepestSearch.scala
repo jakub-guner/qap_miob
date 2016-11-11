@@ -14,7 +14,7 @@ class SteepestSearch extends LocalSearch{
       val (newPermutation, newResult) =
         nb
         .map{
-          case permutation => (permutation, problem.calculateResult(permutation))
+          case permutation => (permutation, problem.calculateResult(permutation, currentResult))
         }
         .filter {
           case (permutation, result:Int) => result < currentResult

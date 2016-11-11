@@ -1,6 +1,7 @@
 package qap
 
 import scala.Array._
+import scala.collection.SeqView
 import scala.io.Source
 
 /**
@@ -18,7 +19,7 @@ object QuadraticAssignmentProblem extends App {
     }
 
     def getInstanceSizeFromFirstLine(lns:Iterator[String]): Int = {
-      lns.next().toInt
+      lns.next().trim.toInt
     }
 
     def getMatrix(instanceSize: Int,lines: Iterator[String]): Array[Array[Int]] = {
@@ -51,19 +52,32 @@ object QuadraticAssignmentProblem extends App {
     readLinesFromFile.next().split(" ").filter(_.size>0)(1).toInt
   }
 
-  def apply(instanceName:String) = loadInstance(instanceName)
+  def apply(instanceName:String) = {
+    println(s"Loading: $instanceName")
+    loadInstance(instanceName)
+  }
 
 }
 
 class QuadraticAssignmentProblem(val name:String, val size:Int, val flows:Array[Array[Int]], val distances:Array[Array[Int]], val optimalSolution:Int){
 
-  def calculateResult(permutation: Array[Int]) : Int = {
+  def calculateResult(permutation: Array[Int], currentBest:Int=Int.MaxValue) : Int = {
     val products=for{
-      facilityA <- 0 until size
-      facilityB <- 0 until size
+      facilityA <- (0 until size).view
+      facilityB <- (0 until size).view
       locationA = permutation(facilityA)-1
       locationB = permutation(facilityB)-1
     } yield flows(facilityA)(facilityB) * distances(locationA)(locationB)
+
+    //Optimization - evaluate lazily; return immediately when the result is worse than current best
+//    def getSum(sequence:SeqView[Int, Seq[_]]): Int ={
+//      sequence.foldLeft(0){
+//        (sofar, next)=>if(sofar + next < currentBest) sofar+next
+//        else return Int.MaxValue
+//      }
+//    }
+//
+//    getSum(products)
 
     products.sum
   }

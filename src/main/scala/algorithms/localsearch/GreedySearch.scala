@@ -19,7 +19,7 @@ class GreedySearch extends LocalSearch{
       val (newPermutation, newResult) =
         neighbourhood(currentPermutation)
         .map{
-          case permutation => (permutation, problem.calculateResult(permutation))
+          case permutation => (permutation, problem.calculateResult(permutation, currentResult))
         }
         .filter {
           case (permutation, result:Int) => {coveredSolutions+=1; result < currentResult}

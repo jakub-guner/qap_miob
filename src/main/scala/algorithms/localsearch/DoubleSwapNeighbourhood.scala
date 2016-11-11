@@ -15,7 +15,7 @@ trait DoubleSwapNeighbourhood extends Neighbourhood{
 
     allPairs
       .toStream
-      .map{
+      .flatMap{
         case (left, right) => swapElements(solution, left, right)
       }
   }
