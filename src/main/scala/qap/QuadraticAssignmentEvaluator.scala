@@ -5,10 +5,10 @@ package qap
  */
 object QuadraticAssignmentEvaluator {
 
-  def evaluateSolution(solution: QuadraticAssignmentSolution, problem: QuadraticAssignmentProblem) = {
+  def evaluateSolution(solution: QASolution, problem: QAProblem) = {
     val result=problem.calculateResult(solution.permutation)
     solution.copy(value=result)
   }
 
-  def apply(solution: QuadraticAssignmentSolution, problem: QuadraticAssignmentProblem) = evaluateSolution(solution, problem)
+  def apply(solution: QASolution, problem: QAProblem) = evaluateSolution(solution, problem)
 }

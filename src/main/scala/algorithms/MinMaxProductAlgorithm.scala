@@ -1,6 +1,6 @@
 package algorithms
 
-import qap.{QuadraticAssignmentProblem, QuadraticAssignmentSolution}
+import qap.{QAProblem, QASolution}
 
 
 /**
@@ -11,7 +11,7 @@ object MinMaxProductAlgorithm extends Algorithm{
   case class Entry(value: Int, row: Int, col:Int)
   case class Position(facilityIndex: Int, locationIndex:Int)
   
-  override def calculate(problem: QuadraticAssignmentProblem): QuadraticAssignmentSolution = {
+  override def calculate(problem: QAProblem): QASolution = {
     
     val flows=toSortedList(problem.flows)
     val distances=toSortedList(problem.distances)
@@ -24,7 +24,7 @@ object MinMaxProductAlgorithm extends Algorithm{
       .map(_.facilityIndex+1)
       .toArray
 
-    QuadraticAssignmentSolution(permutation)
+    QASolution(permutation)
   }
 
   def findBestMatches(flows: List[Entry], distances: List[Entry]): List[Position] ={

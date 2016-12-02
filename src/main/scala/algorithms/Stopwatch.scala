@@ -1,6 +1,6 @@
 package algorithms
 
-import qap.QuadraticAssignmentSolution
+import qap.QASolution
 
 /**
  * Created by JG on 13/10/16.
@@ -8,7 +8,7 @@ import qap.QuadraticAssignmentSolution
 trait Stopwatch {
   private val MILLION=Math.pow(10,6)
 
-  def measureTime(calculate: => QuadraticAssignmentSolution): QuadraticAssignmentSolution ={
+  def measureTime(calculate: => QASolution): QASolution ={
     val start = System.nanoTime()
     val solution = calculate
     val end = System.nanoTime()

@@ -24,7 +24,6 @@ trait TripleSwapNeighbourhood extends Neighbourhood{
       case (left, middle,right) => swapElements(solution, middle, right, left)
 
     }
-//      .map(_.mkString(" ")).foreach{println}
   }
 
 }

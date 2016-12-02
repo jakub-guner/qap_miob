@@ -8,7 +8,7 @@ import QuadraticAssignmentEvaluator._
  * Created by JG on 30/10/16.
  */
 class SteepestSearch extends LocalSearch{
-  override def searchSolutionSpace(problem: QuadraticAssignmentProblem, currentPermutation: Array[Int], currentResult: Int, steps:Int, evaluatedSolutions:Int): QuadraticAssignmentSolution = {
+  override def searchSolutionSpace(problem: QAProblem, currentPermutation: Array[Int], currentResult: Int, steps:Int, evaluatedSolutions:Int): QASolution = {
     try {
       val nb=neighbourhood(currentPermutation)
       val (newPermutation, newResult) =
@@ -24,7 +24,7 @@ class SteepestSearch extends LocalSearch{
         }
       searchSolutionSpace(problem, newPermutation, newResult, steps=steps+1, evaluatedSolutions=evaluatedSolutions+nb.size)
     }catch{
-      case uoe:UnsupportedOperationException => QuadraticAssignmentSolution(currentPermutation).copy(steps=steps, evaluatedSolutions=evaluatedSolutions)
+      case uoe:UnsupportedOperationException => QASolution(currentPermutation).copy(steps=steps, evaluatedSolutions=evaluatedSolutions)
     }
 
   }

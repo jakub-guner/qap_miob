@@ -1,6 +1,6 @@
 package algorithms
 
-import qap.{QuadraticAssignmentSolution, QuadraticAssignmentProblem}
+import qap.{QASolution, QAProblem}
 /**
  * Created by JG on 15/10/16.
  */
@@ -9,7 +9,7 @@ object RandomAlgorithm{
 
   def apply(timeLimit:Int) = new RandomAlgorithm(timeLimit)
 
-  def randomPermutation(problem: QuadraticAssignmentProblem): Array[Int] = {
+  def randomPermutation(problem: QAProblem): Array[Int] = {
     random.shuffle(1 to problem.size).toArray[Int]
   }
 }
@@ -19,11 +19,11 @@ class RandomAlgorithm(val timeLimit:Int) extends Algorithm{
 
   private val MILLION=Math.pow(10,6)
 
-  def calculate(problem: QuadraticAssignmentProblem): QuadraticAssignmentSolution = {
-    QuadraticAssignmentSolution(findBestPermutation(problem))
+  def calculate(problem: QAProblem): QASolution = {
+    QASolution(findBestPermutation(problem))
   }
 
-  def findBestPermutation(problem: QuadraticAssignmentProblem): Array[Int]={
+  def findBestPermutation(problem: QAProblem): Array[Int]={
     val start = System.nanoTime()
     var bestPermutation=Array.empty[Int]
     var bestResult=Int.MaxValue

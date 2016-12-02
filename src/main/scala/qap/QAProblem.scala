@@ -7,11 +7,11 @@ import scala.io.Source
 /**
  * Created by JG on 13/10/16.
  */
-object QuadraticAssignmentProblem extends App {
+object QAProblem extends App {
   //Data downloaded from https://www.cs.put.poznan.pl/mkomosinski/lectures/mam/qap.zip
   //Format documentation http://anjos.mgi.polymtl.ca/qaplib/inst.html
 
-  def loadInstance(instanceName:String):QuadraticAssignmentProblem ={
+  def loadInstance(instanceName:String):QAProblem ={
     def makeFullPath = "./qapdatsol/"+instanceName +".dat"
 
     def readLinesFromFile: Iterator[String] = {
@@ -39,7 +39,7 @@ object QuadraticAssignmentProblem extends App {
     skipLine(lines)
     val distances=getMatrix(instanceSize, lines)
     val optimalSolution=loadOptimalSolution(instanceName)
-    new QuadraticAssignmentProblem(instanceName, instanceSize, flows, distances, optimalSolution)
+    new QAProblem(instanceName, instanceSize, flows, distances, optimalSolution)
   }
   
   def loadOptimalSolution(instanceName:String) :Int= {
@@ -59,7 +59,7 @@ object QuadraticAssignmentProblem extends App {
 
 }
 
-class QuadraticAssignmentProblem(val name:String, val size:Int, val flows:Array[Array[Int]], val distances:Array[Array[Int]], val optimalSolution:Int){
+class QAProblem(val name:String, val size:Int, val flows:Array[Array[Int]], val distances:Array[Array[Int]], val optimalSolution:Int){
 
   def calculateResult(permutation: Array[Int], currentBest:Int=Int.MaxValue) : Int = {
     val products=for{

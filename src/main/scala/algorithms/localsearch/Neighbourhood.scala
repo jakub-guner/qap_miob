@@ -13,13 +13,6 @@ trait Neighbourhood {
     0 until solution.size
   }
 
-//  def swapElements(solution: Array[Int], left: Int, right: Int): Array[Int] = {
-//    val clone = solution.clone()
-//    val temp = clone(left)
-//    clone(left) = clone(right)
-//    clone(right) = temp
-//    clone
-//  }
   def swapElements(solution: Array[Int], middle: Int, right: Int, left:Int = -1): Array[Array[Int]] = {
     def tripleSwap(leftDest:Int):Array[Int]={
       val other=if(leftDest==middle) right else middle

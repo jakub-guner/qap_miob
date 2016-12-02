@@ -1,17 +1,17 @@
 package algorithms
 
-import qap.{QuadraticAssignmentEvaluator, QuadraticAssignmentSolution, QuadraticAssignmentProblem}
+import qap.{QAProblem, QuadraticAssignmentEvaluator, QASolution}
 
 /**
  * Created by JG on 15/10/16.
  */
 abstract class Algorithm extends Stopwatch{
 
-  def calculate(problem: QuadraticAssignmentProblem):QuadraticAssignmentSolution
+  def calculate(problem: QAProblem):QASolution
 
   def name:String
 
-  def apply(problem: QuadraticAssignmentProblem):QuadraticAssignmentSolution = {
+  def apply(problem: QAProblem):QASolution = {
     QuadraticAssignmentEvaluator(measureTime(calculate(problem)), problem)
   }
 
