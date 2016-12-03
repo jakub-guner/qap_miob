@@ -11,13 +11,13 @@ import qap.{QASolution, QAProblem}
 object Report extends App{
 
   val chosenInstances=List(
-      ("chr12b", 30)//,
+//      ("chr12b", 30),
 //      ("had12", 30),
 //      ("bur26a", 500),
 //      ("esc32f", 175),
 //      ("tai40b", 30*1000),
 //      ("tai50b", 10*1000),
-//      ("tai60a", 50*1000),
+      ("tai60a", 50*1000)//,
 //      ("tai80a", 61*1000)
   )
 
@@ -25,8 +25,10 @@ object Report extends App{
     standardAlgorithms
 
   val standardAlgorithms =
-    new SteepestSearch with DoubleSwapNeighbourhood ::
-  new TabuSearch with DoubleSwapNeighbourhood::
+//    new GreedySearch with DoubleSwapNeighbourhood ::
+//    new SimulatedAnnealing with TripleSwapNeighbourhood ::
+//  new TabuSearch with DoubleSwapNeighbourhood::
+    new TabuSearch with TripleSwapNeighbourhood::
 //    MinMaxProductAlgorithm ::
 //    new GreedySearch with DoubleSwapNeighbourhood ::
 //    new GreedySearch with TripleSwapNeighbourhood ::
@@ -40,7 +42,7 @@ object Report extends App{
     new SteepestSearch with TripleSwapNeighbourhood :: Nil
 
   //Zad 2
-  normalExperiment(chosenInstances, chosenAlgorithms = chosenAlgorithms)
+  normalExperiment(chosenInstances, chosenAlgorithms = chosenAlgorithms,1)
 
   //Zad 2.3
 //  normalExperiment(List(("tai60a", 1000*1000)), chosenAlgorithms = chosenAlgorithms, 5)

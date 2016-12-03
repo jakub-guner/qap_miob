@@ -32,4 +32,5 @@ class SteepestSearch extends LocalSearch{
   override def neighName: String = ""
 
   override def name: String = "steepest"+neighName
+
 }

@@ -7,6 +7,8 @@ trait Neighbourhood {
 
   def neighName:String
 
+  def neighSize(solution: Array[Int]):Int=0
+
   def neighbourhood(solution: Array[Int]):Stream[Array[Int]] = {Stream.empty}
 
   def getAllIndexes(solution: Array[Int]): Range = {

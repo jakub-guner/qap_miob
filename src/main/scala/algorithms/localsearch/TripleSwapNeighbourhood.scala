@@ -10,6 +10,11 @@ trait TripleSwapNeighbourhood extends Neighbourhood{
 
   override def neighName:String = "-3swap"
 
+  override def neighSize(solution: Array[Int]):Int={
+    val n=solution.length
+    n*(n-1)*(2*n-1)/6
+  }
+
   override def neighbourhood(solution: Array[Int]):Stream[Array[Int]]={
     val allTriplets=for{
       left <- -1 until solution.length

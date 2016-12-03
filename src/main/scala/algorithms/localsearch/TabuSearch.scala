@@ -7,7 +7,7 @@ import qap.{QASolution, QAProblem}
  */
 class TabuSearch extends LocalSearch{
   val TABU_SIZE=20
-  val STEPS_THRESHOLD=300;
+  val STEPS_THRESHOLD=100;
 
 
   override def searchSolutionSpace(problem: QAProblem, currentPermutation: Array[Int], currentResult: Int, steps:Int, evaluatedSolutions:Int): QASolution = {

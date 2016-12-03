@@ -7,6 +7,11 @@ trait DoubleSwapNeighbourhood extends Neighbourhood{
 
   override def neighName:String = "-2swap"
 
+  override def neighSize(solution: Array[Int]):Int={
+    val n=solution.length
+    n*(n-1)/2
+  }
+
   override def neighbourhood(solution: Array[Int]):Stream[Array[Int]]={
     val allPairs=for{
       left <- getAllIndexes(solution)
